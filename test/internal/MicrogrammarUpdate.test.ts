@@ -1,6 +1,6 @@
 import { isSuccessfulMatch } from "../../lib/MatchPrefixResult";
 import { Microgrammar } from "../../lib/Microgrammar";
-import { Opt } from "../../lib/Ops";
+import { Opt, optional } from "../../lib/Ops";
 
 import * as assert from "power-assert";
 
@@ -18,13 +18,13 @@ describe("MicrogrammarUpdateTest", () => {
         };
         return Microgrammar.fromDefinitions({
             first: element,
-            second: new Opt(element),
+            second: optional(element),
         });
     }
 
     interface XmlNode {
-        first: string;
-        second?: string;
+        first: { lx: "<", name: string, rx: ">" };
+        second?: { lx: "<", name: string, rx: ">" };
     }
 
     it("update name in late element at start", () => {
@@ -32,7 +32,7 @@ describe("MicrogrammarUpdateTest", () => {
         const result: XmlNode[] = iterateIntoArray(xmlGrammar().matchReportIterator(content))
             .map(s => toUpdatableStructure<XmlNode>(s)); // the type specification will move to matchReportIterator
         const updatableStructure = result[0];
-        updatableStructure.second = "<newSecond>";
+        updatableStructure.second.name = "newSecond";
         assert.strictEqual(applyChanges([updatableStructure], content), "<first><newSecond>");
         // we also want to be able to get the deltas. Check those
     });
