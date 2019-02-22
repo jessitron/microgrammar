@@ -1,10 +1,16 @@
 import { isSuccessfulMatch } from "../../lib/MatchPrefixResult";
 import { Microgrammar } from "../../lib/Microgrammar";
-import { Opt, optional } from "../../lib/Ops";
+import {
+    Opt,
+    optional,
+} from "../../lib/Ops";
 
 import * as assert from "power-assert";
 
-import { applyChanges, toUpdatableStructure } from "../../lib/internal/matchReport/updatableStructure";
+import {
+    applyChanges,
+    toUpdatableStructure,
+} from "../../lib/internal/matchReport/updatableStructure";
 import { SuccessfulMatchReport } from "../../lib/MatchReport";
 import { Integer } from "../../lib/Primitives";
 import { RepSep } from "../../lib/Rep";
