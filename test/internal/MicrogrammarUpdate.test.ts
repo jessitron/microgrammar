@@ -5,6 +5,7 @@ import { Opt, optional } from "../../lib/Ops";
 import * as assert from "power-assert";
 
 import { applyChanges, toUpdatableStructure } from "../../lib/internal/matchReport/updatableStructure";
+import { SuccessfulMatchReport } from "../../lib/MatchReport";
 import { Integer } from "../../lib/Primitives";
 import { RepSep } from "../../lib/Rep";
 
@@ -29,11 +30,12 @@ describe("MicrogrammarUpdateTest", () => {
 
     it("update name in late element at start", () => {
         const content = "<first><second>";
-        const result: XmlNode[] = iterateIntoArray(xmlGrammar().matchReportIterator(content))
-            .map(s => toUpdatableStructure<XmlNode>(s)); // the type specification will move to matchReportIterator
-        const updatableStructure = result[0];
-        updatableStructure.second.name = "newSecond";
-        assert.strictEqual(applyChanges([updatableStructure], content), "<first><newSecond>");
+        const matchReports: SuccessfulMatchReport[] = iterateIntoArray(xmlGrammar().matchReportIterator(content));
+        const firstReport = matchReports[0];
+        const firstValue = firstReport.toValueStructure<XmlNode>();
+        console.log("value before: " + JSON.stringify(firstValue, null, 2));
+        firstValue.second.name = "newSecond";
+        assert.strictEqual(applyChanges(firstReport, firstValue, content), "<first><newSecond>");
         // we also want to be able to get the deltas. Check those
     });
     // also test updating an opt that wasn't there :-)
