@@ -65,7 +65,8 @@
     "lint:fix": "npm run lint -- --fix",
     "test": "mocha --require espower-typescript/guess \"test/**/*.test.ts\"",
     "test:one": "mocha --require espower-typescript/guess \"test/**/${TEST:-*.test.ts}\"",
-    "typedoc": "npm run doc"
+    "typedoc": "npm run doc",
+    "try-cli": "ts-node ./script/cli.ts 'try-cli\": \"${thisCommand}\"' package.json"
   },
   "engines": {
     "node": ">=8.0.0",
