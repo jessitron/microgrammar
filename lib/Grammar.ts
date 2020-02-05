@@ -14,7 +14,6 @@ import {
 } from "./Config";
 import {
     MatchReport,
-    SuccessfulMatchReport,
 } from "./MatchReport";
 
 export type AllowableTermDef<PARAMS> = (TermDef | ((ctx: PARAMS & any) => any) | { [index: string]: any });
