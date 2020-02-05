@@ -8,8 +8,8 @@
  * (well, powershell is great at it) and expect them in env vars.
  * 
  * required:
- * MGSTRING=the microgrammar string
- * INPUT=an input filepath
+ * MG_STRING=the microgrammar string
+ * INPUT_PATH=an input filepath
  * 
  * optional:
  * ENCODING=file encoding, default UTF8
@@ -29,19 +29,15 @@ function say(str: String) {
     console.log(str);
 }
 
-say(`Received ${process.argv.length} arguments. expected at least 4. ${process.argv.join(",")}`)
-if (process.argv.length < 4) {
-    console.log(usage)
-    process.exit(1);
-}
-
-const [_nodeExecutable, _thisScript, mgString, ...files] = process.argv;
-
-say(`Microgrammar: [${mgString}]`);
-
 function outputData(data: any) {
     console.log(JSON.stringify(data), null, 2)
 }
+
+const mgString = process.env["MG_STRING"]
+const files = [process.env["INPUT_PATH"]]
+
+say(`Microgrammar: [${mgString}]`);
+
 
 const microgrammar = mg.microgrammar(mgString as any);
 say(`Files: [${files.join("],[")}]`);
