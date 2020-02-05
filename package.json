@@ -67,7 +67,7 @@
     "test": "mocha --require espower-typescript/guess \"test/**/*.test.ts\"",
     "test:one": "mocha --require espower-typescript/guess \"test/**/${TEST:-*.test.ts}\"",
     "typedoc": "npm run doc",
-    "try-cli": "node ./script/cli.ts 'try-cli\": \"${thisCommand}\"' package.json"
+    "try-cli": "node ./script/cli.js 'try-cli\": \"${thisCommand}\"' package.json"
   },
   "engines": {
     "node": ">=8.0.0",
