@@ -37,7 +37,7 @@ const files = ["package.json"]
 say(`Microgrammar: [${mgString}]`);
 say(`Files: [${files.join("],[")}]`);
 
-const microgrammar = mg.microgrammar({ phrase: mgString });
+const microgrammar = mg.microgrammar<{}>(mgString);
 
 async function findMatchesInFile(microgrammar: mg.Microgrammar<{}>, path: string) {
     const input = await util.promisify(fs.readFile)(path);

@@ -40,7 +40,10 @@ export interface MicrogrammarDefinition<T> {
  * @param definition full definition, including a phrase string, or terms definition
  * @return {Grammar<T>}
  */
-export function microgrammar<T>(definition: MicrogrammarDefinition<T> | TermsDefinition<T>): Grammar<T> {
+export function microgrammar<T>(definition: string | MicrogrammarDefinition<T> | TermsDefinition<T>): Grammar<T> {
+    if (typeof definition === "string") {
+        return Microgrammar.fromString(definition);
+    }
     if (!definition.phrase && !definition.terms) {
         return Microgrammar.fromDefinitions(definition as any);
     }
