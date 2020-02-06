@@ -19,8 +19,6 @@ import * as mg from "../index"
 import * as fs from "fs"
 import * as util from "util"
 
-const usage = `mg <microgrammar string> <input file> [file...]`
-
 /*
  * TODO: make this print to a different file descriptor if I can. Or else stderr.
  * Because this program outputs data for use by programs, and this output is for a human.
@@ -36,11 +34,13 @@ function outputData(data: any) {
 const mgString = process.env["MG_STRING"]
 const files = [process.env["INPUT_PATH"]]
 
+console.log(JSON.stringify(process.env, null, 2))
+
 say(`Microgrammar: [${mgString}]`);
+say(`Files: [${files.join("],[")}]`);
 
 
 const microgrammar = mg.microgrammar(mgString as any);
-say(`Files: [${files.join("],[")}]`);
 
 async function findMatchesInFile(microgrammar: mg.Microgrammar<{}>, path: string) {
     const input = await util.promisify(fs.readFile)(path);
