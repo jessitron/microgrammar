@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+/**
+ * Use the 'microgrammar' function to construct a Grammar object out of
+ * a parsing specification.
+ */
+export { microgrammar } from "./lib/microgrammarConstruction";
+
 export * from "./lib/InputState";
 
 export * from "./lib/Matchers";
@@ -46,7 +52,7 @@ export * from "./lib/Microgrammar";
 
 export * from "./lib/Grammar";
 
-export * from "./lib/microgrammarConstruction";
+export { MicrogrammarDefinition, simpleMicrogrammar } from "./lib/microgrammarConstruction";
 
 export * from "./lib/Ops";
 
