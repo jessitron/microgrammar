@@ -28,16 +28,16 @@ function say(str: String) {
 }
 
 function outputData(data: any) {
-    console.log(JSON.stringify(data), null, 2)
+    console.log(JSON.stringify(data, null, 2));
 }
 
-const mgString = 'try-cli'
+const mgString = 'try-cli\": \"${thisCommand}\"';
 const files = ["package.json"]
 
 say(`Microgrammar: [${mgString}]`);
 say(`Files: [${files.join("],[")}]`);
 
-const microgrammar = mg.microgrammar(mgString as any);
+const microgrammar = mg.microgrammar({ phrase: mgString });
 
 async function findMatchesInFile(microgrammar: mg.Microgrammar<{}>, path: string) {
     const input = await util.promisify(fs.readFile)(path);
