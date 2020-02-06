@@ -31,7 +31,7 @@ function outputData(data: any) {
     console.log(JSON.stringify(data), null, 2)
 }
 
-const mgString = 'try-cli\": \"${thisCommand}\"'
+const mgString = 'try-cli'
 const files = ["package.json"]
 
 say(`Microgrammar: [${mgString}]`);
