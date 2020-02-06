@@ -31,23 +31,21 @@ function outputData(data: any) {
     console.log(JSON.stringify(data), null, 2)
 }
 
-const mgString = process.env["MG_STRING"]
-const files = [process.env["INPUT_PATH"]]
-
-console.log(JSON.stringify(process.env, null, 2))
+const mgString = 'try-cli\": \"${thisCommand}\"'
+const files = ["package.json"]
 
 say(`Microgrammar: [${mgString}]`);
 say(`Files: [${files.join("],[")}]`);
-
 
 const microgrammar = mg.microgrammar(mgString as any);
 
 async function findMatchesInFile(microgrammar: mg.Microgrammar<{}>, path: string) {
     const input = await util.promisify(fs.readFile)(path);
+    say("Looking for matches in " + path);
     const matches = microgrammar.matchReportIterator(input.toString(process.env["ENCODING"] || "UTF8"));
     for (const m of matches) {
         outputData(m.toValueStructure());
     }
 }
 
-findMatchesInFile(microgrammar as mg.Microgrammar<{}>, files[0]).catch(e => "failure")
+findMatchesInFile(microgrammar as mg.Microgrammar<{}>, files[0]).catch(e => console.log("failure"))
